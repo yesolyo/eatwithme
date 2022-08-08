@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "83920363205",
+    "project_id": "fir-graduation-project",
+    "storage_bucket": "fir-graduation-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83920363205:android:7155e54042896903ae1aac",
+        "android_client_info": {
+          "package_name": "com.fgp.firebase_graduation_project.firebase_graduation_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83920363205-qjts7gi3h5eioidosr40s35ig75a1oq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fgp.firebase_graduation_project.firebase_graduation_project",
+            "certificate_hash": "5336fc35c5a0f290eb48cfd03bf4bee9e79ec6d1"
+          }
+        },
+        {
+          "client_id": "83920363205-4pgou9ir36jlq6jp2ubjivninbvcfujm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwc8tPTwAKXj4Lx5QoDWb6zPPRb5qDLbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83920363205-4pgou9ir36jlq6jp2ubjivninbvcfujm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
