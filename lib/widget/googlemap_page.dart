@@ -153,7 +153,7 @@ class _TestGoogleMapState extends State<TestGoogleMap> {
                                                 onPressed: () {
                                                   Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(builder: (context) => FindListviewPage()),
+                                                    MaterialPageRoute(builder: (context) => FindListView()),
                                                   );
                                                 }),
                                           ),

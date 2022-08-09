@@ -24,6 +24,7 @@ class TimeList extends StatefulWidget {
 
 class _TimeListState extends State<TimeList> {
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -235,73 +236,115 @@ class _TimeListState extends State<TimeList> {
                             },
                           ),
                           ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.blueAccent, // Background color
-                                onPrimary: Colors
-                                    .white, // Text Color (Foreground color)
-                              ),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible:
-                                  false, // 다이얼로그 이외의 바탕 눌러도 안꺼지도록 설정
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text('확인창'),
-                                      content: SingleChildScrollView(
-                                        child: ListBody(
-                                          //List Body를 기준으로 Text 설정
-                                          children: <Widget>[
-                                            Text('신청하시겠습니까?'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blueAccent, // Background color
+                                  onPrimary: Colors
+                                      .white, // Text Color (Foreground color)
+                                ),
+                                onPressed: () {
+                                  if (register.min != register.max) {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible:
+                                      false, // 다이얼로그 이외의 바탕 눌러도 안꺼지도록 설정
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('확인창'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              //List Body를 기준으로 Text 설정
+                                              children: <Widget>[
+                                                Text('신청하시겠습니까?'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('확인'),
+                                              onPressed: () {
+                                                final inputData = Provider.of<
+                                                    InputData>(context,
+                                                  listen: false,);
+                                                final matching = Matching(
+                                                  approve: 0,
+                                                  max: register.max,
+                                                  date: register.date,
+                                                  detail: register.detail,
+                                                  end: register.end,
+                                                  start: register.start,
+                                                  storeName: register.storeName,
+                                                  title: register.title,
+                                                  register_id: register.id,
+                                                  user_id: inputData
+                                                      .googleAccount!.email,
+                                                );
+                                                createMatching(matching);
+                                                //min을 +1하는 부분
+                                                final sfDocRef = FirebaseFirestore
+                                                    .instance.collection(
+                                                    "register").doc(register.id);
+                                                FirebaseFirestore.instance
+                                                    .runTransaction((
+                                                    transaction) {
+                                                  return transaction.get(sfDocRef)
+                                                      .then((sfDoc) {
+                                                    final newPopulation = sfDoc
+                                                        .get("min") + 1;
+                                                    transaction.update(sfDocRef,
+                                                        {"min": newPopulation});
+                                                    return newPopulation;
+                                                  });
+                                                }).then(
+                                                      (newPopulation) => print(
+                                                      "Population increased to $newPopulation"),
+                                                  onError: (e) =>
+                                                      print(
+                                                          "Error updating document $e"),
+                                                );
+
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            TextButton(
+                                              child: Text('취소'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
                                           ],
-                                        ),
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          child: Text('확인'),
-                                          onPressed: () {
-                                            final inputData = Provider.of<InputData>(context,
-                                              listen: false,);
-                                            final matching = Matching(
-                                              approve: 0,
-                                              max: register.max,
-                                              date: register.date,
-                                              detail: register.detail,
-                                              end: register.end,
-                                              start: register.start,
-                                              storeName: register.storeName,
-                                              title: register.title,
-                                              register_id: register.id,
-                                              user_id: inputData.googleAccount!.email,
-                                            );
-                                            createMatching(matching);
-                                            //min을 +1하는 부분
-                                            final sfDocRef = FirebaseFirestore.instance.collection("register").doc(register.id);
-                                            FirebaseFirestore.instance.runTransaction((transaction) {
-                                              return transaction.get(sfDocRef).then((sfDoc) {
-                                                final newPopulation = sfDoc.get("min") + 1;
-                                                transaction.update(sfDocRef, {"min": newPopulation});
-                                                return newPopulation;
-                                              });
-                                            }).then(
-                                                  (newPopulation) => print("Population increased to $newPopulation"),
-                                              onError: (e) => print("Error updating document $e"),
-                                            );
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        TextButton(
-                                          child: Text('취소'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
+                                        );
+                                      },
+                                    );}
+                                  else {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible:
+                                      false, // 다이얼로그 이외의 바탕 눌러도 안꺼지도록 설정
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('확인창'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              //List Body를 기준으로 Text 설정
+                                              children: <Widget>[
+                                                Text('마감하였습니다.'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('확인'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     );
-                                  },
-                                );
-                              },
-                              child: Text("신청")),
+                                  }
+                                },
+                                child: Text("신청")),
 
                         ]),
 
@@ -316,6 +359,7 @@ class _TimeListState extends State<TimeList> {
           .snapshots()
           .map((snapshot) =>
           snapshot.docs.map((doc) => Register.fromJson(doc.data())).toList());
+
 
   Future createMatching(Matching matching) async {
     final docRegister = FirebaseFirestore.instance.collection('matching').doc();
