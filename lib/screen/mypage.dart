@@ -1,3 +1,4 @@
+import 'package:firebase_graduation_project/screen/recommend_register.dart';
 import 'package:firebase_graduation_project/widget/register_listview.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +28,19 @@ class _MyPageState extends State<MyPage> {
             fontSize: 20,color: Colors.black45)),
           Expanded(child: MatchingListview()),
         ],
-      )
-
+      ),
+        floatingActionButton :
+        FloatingActionButton.extended(
+        onPressed: (){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RecommendRegister()),);
+    },
+    label: Text('취향 분석 등록'),
+    icon: Icon(Icons.add_task),
+    backgroundColor: Colors.blue[900],
+    elevation: 0,
+    ),
     );
   }
 }

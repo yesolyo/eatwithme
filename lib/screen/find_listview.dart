@@ -29,11 +29,11 @@ class _FindListViewState extends State<FindListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('마이페이지'),
+        title: Text('식당별 매칭 목록'),
       ),
 
       body: StreamBuilder<List<Register>>(
-          stream: readRegister(),
+          stream: readRegister(context),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text('Something went wrong! ${snapshot.error}');
@@ -316,12 +316,16 @@ class _FindListViewState extends State<FindListView> {
                 ]),
           ));
 
-  Stream<List<Register>> readRegister() =>
-      FirebaseFirestore.instance
-          .collection('register')
-          .snapshots()
-          .map((snapshot) =>
-          snapshot.docs.map((doc) => Register.fromJson(doc.data())).toList());
+  Stream<List<Register>> readRegister(BuildContext context)async *{
+    final inputData = Provider.of<InputData>(context,
+      listen: false,);
+    yield* FirebaseFirestore.instance
+        .collection('register')
+        .where('storeName', isEqualTo: inputData.store_name)
+        .snapshots()
+        .map((snapshot) =>
+        snapshot.docs.map((doc) => Register.fromJson(doc.data())).toList());
+  }
 
 
   Future createMatching(Matching matching) async {

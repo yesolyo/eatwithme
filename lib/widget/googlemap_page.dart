@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../model/input_data.dart';
 import '../screen/find_listview.dart';
 
 class TestGoogleMap extends StatefulWidget {
@@ -38,6 +39,7 @@ class _TestGoogleMapState extends State<TestGoogleMap> {
 
   @override
   Widget build(BuildContext context) {
+    final inputData = Provider.of<InputData>(context);
     return new Scaffold(
       key: scaffoldKey,
       body: Stack(children: [
@@ -60,109 +62,111 @@ class _TestGoogleMapState extends State<TestGoogleMap> {
                         onTap: () {
                           var bottomSheetController = scaffoldKey.currentState!
                               .showBottomSheet((context) => Container(
-                                    child: Stack(
-                                      children: <Widget>[
-                                        Container(
-                                          margin: EdgeInsets.only(top: 32),
-                                          color: Colors.white,
+                            child: Stack(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 32),
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        color: Colors.blueAccent,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(
+                                              16.0),
                                           child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .start,
                                             children: <Widget>[
-                                              Container(
-                                                color: Colors.blueAccent,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      16.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: <Widget>[
-                                                      Text(
-                                                        element['place'],
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 14),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Row(
-                                                        children: <Widget>[
-                                                          Icon(
-                                                            Icons.dining_outlined,
-                                                            color:
-                                                                Colors.white,
-                                                          ),
-                                                          Text(element['kind'],
-                                                          style: TextStyle(
-                                                              color: Colors.white,
-                                                              fontSize: 14),),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                              Text(
+                                                element['place'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14),
                                               ),
                                               SizedBox(
-                                                height: 20,
+                                                height: 5,
                                               ),
                                               Row(
                                                 children: <Widget>[
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
                                                   Icon(
-                                                    Icons.map,
-                                                    color: Colors.blue,
+                                                    Icons.dining_outlined,
+                                                    color:
+                                                    Colors.white,
                                                   ),
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  Text(element['address'])
+                                                  Text(element['kind'],
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14),),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Row(
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  Icon(
-                                                    Icons.call,
-                                                    color: Colors.blue,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  Text(element['number'])
-                                                ],
-                                              )
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Align(
-                                            alignment: Alignment.topRight,
-                                            child: FloatingActionButton(
-                                                child:
-                                                    Icon(Icons.person_search),
-                                                backgroundColor: Colors.blueAccent,
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => FindListView()),
-                                                  );
-                                                }),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            width: 20,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    height: 250,
-                                    color: Colors.transparent,
-                                  ));
+                                          Icon(
+                                            Icons.map,
+                                            color: Colors.blue,
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text(element['address'])
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Icon(
+                                            Icons.call,
+                                            color: Colors.blue,
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text(element['number']),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: FloatingActionButton(
+                                        child:
+                                        Icon(Icons.person_search),
+                                        backgroundColor: Colors.blueAccent,
+
+                                        onPressed: () {
+                                          inputData.store_name=element['place'];
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => FindListView()),
+                                          );
+                                        }),
+                                  ),
+                                )
+                              ],
+                            ),
+                            height: 250,
+                            color: Colors.transparent,
+                          ));
                         },
                         snippet: element['address']));
               }).toList();

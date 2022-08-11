@@ -218,6 +218,11 @@ class _ApplicationListviewState extends State<ApplicationListview> {
                                         TextButton(
                                           child: Text('확인'),
                                           onPressed: () {
+                                            final docuser=FirebaseFirestore.instance
+                                            .collection('register')
+                                            .doc(register.id);
+
+                                            docuser.delete();
                                             Navigator.of(context).pop();
                                           },
                                         ),

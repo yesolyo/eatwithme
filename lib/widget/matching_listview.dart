@@ -125,8 +125,7 @@ class _MatchingListviewState extends State<MatchingListview> {
                               color: Colors.grey, size: 16),
                           Container(
                             margin: EdgeInsets.only(left: 10),
-                            child: Text("/ ${matching.max}",style: TextStyle(
-                                fontWeight: FontWeight. bold),),
+                            child: Text(" ${matching.max}"),
                           ),
                         ]),
                   ),
@@ -169,7 +168,7 @@ class _MatchingListviewState extends State<MatchingListview> {
                                               Text("날짜: ${matching.date}"),
                                               Text("시간: ${matching
                                                   .start}~${matching.end}"),
-                                              Text("최대인원: ${matching.max}"),
+                                              Text("최대인원:${matching.max}"),
                                             ],
                                           ),
                                         ),
@@ -214,6 +213,32 @@ class _MatchingListviewState extends State<MatchingListview> {
                                         TextButton(
                                           child: Text('확인'),
                                           onPressed: () {
+                                            final sfDocRef = FirebaseFirestore
+                                                .instance.collection(
+                                                "register").doc(matching.register_id);
+                                            FirebaseFirestore.instance
+                                                .runTransaction((
+                                                transaction) {
+                                              return transaction.get(sfDocRef)
+                                                  .then((sfDoc) {
+                                                final newPopulation = sfDoc
+                                                    .get("min") - 1;
+                                                transaction.update(sfDocRef,
+                                                    {"min": newPopulation});
+                                                return newPopulation;
+                                              });
+                                            }).then(
+                                                  (newPopulation) => print(
+                                                  "Population increased to $newPopulation"),
+                                              onError: (e) =>
+                                                  print(
+                                                      "Error updating document $e"),
+                                            );
+                                            final docuser=FirebaseFirestore.instance
+                                                .collection('matching')
+                                                .doc(matching.id);
+
+                                            docuser.delete();
                                             Navigator.of(context).pop();
                                           },
                                         ),
@@ -241,7 +266,7 @@ class _MatchingListviewState extends State<MatchingListview> {
     final inputData = Provider.of<InputData>(context,
       listen: false,);
     yield* FirebaseFirestore.instance
-        .collection("matching")
+        .collection('matching')
         .where("user_id", isEqualTo: inputData.googleAccount!.email)
         .snapshots()
         .map((snapshot) =>

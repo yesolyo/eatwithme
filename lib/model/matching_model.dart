@@ -40,6 +40,7 @@ class Matching {
         'user_id': user_id};
 
   static Matching fromJson(Map<String, dynamic> json) => Matching(
+      id: json['id'],
     date: json['date'],
     start: json['start'],
     end: json['end'],

@@ -25,6 +25,7 @@ class TotalMakeMatching extends StatefulWidget {
 
 
 class _TotalMakeMatchingState extends State<TotalMakeMatching> {
+
   int selectedStack = 0;
   GlobalKey<FormState> _fkey = GlobalKey<FormState>();
   bool autovalidate = false;
@@ -45,50 +46,50 @@ class _TotalMakeMatchingState extends State<TotalMakeMatching> {
 
     final inputData = Provider.of<InputData>(context,
       listen: false,);
-      final result = await showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Confirm'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  color: Colors.grey[100],
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 20.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text('식당 이름: ${inputData.store_name}'),
-                      Text('날짜: ${inputData.promise_date}'),
-                      Text('시간: ${inputData.starttime} ~ ${inputData.endtime}'),
-                      Text('인원: ${inputData.maxpers}'),
-                    ],
-                  ),
+    final result = await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirm'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                color: Colors.grey[100],
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 20.0,
                 ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: Text('OK'),
-              ),
-              TextButton(
-                onPressed: () =>
-                  Navigator.of(context).pop(false),
-                child: Text('CANCEL'),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text('식당 이름: ${inputData.store_name}'),
+                    Text('날짜: ${inputData.promise_date}'),
+                    Text('시간: ${inputData.starttime} ~ ${inputData.endtime}'),
+                    Text('인원: ${inputData.maxpers}'),
+                  ],
+                ),
               ),
             ],
-          );
-        },
-      );
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text('OK'),
+            ),
+            TextButton(
+              onPressed: () =>
+                  Navigator.of(context).pop(false),
+              child: Text('CANCEL'),
+            ),
+          ],
+        );
+      },
+    );
 
 
     if(result){
@@ -121,104 +122,104 @@ class _TotalMakeMatchingState extends State<TotalMakeMatching> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
           automaticallyImplyLeading: false,
-        title: GestureDetector(
-          onTap: () {
-            print("click");
-          },
-          child: PopupMenuButton<String>(
-            offset: Offset(0, 30),
-            shape: ShapeBorder.lerp(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                1),
-            onSelected: (String where) {
-              print(where);
+          title: GestureDetector(
+            onTap: () {
+              print("click");
             },
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(value: "sookmyung", child: Text("숙명여대")),
-                PopupMenuItem(value: "ewha", child: Text("이화여대")),
-              ];
-            },
-            child: Row(
-              children: [Text("숙명여대"), Icon(Icons.arrow_drop_down)],
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MyPage()),
-                );
+            child: PopupMenuButton<String>(
+              offset: Offset(0, 30),
+              shape: ShapeBorder.lerp(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  1),
+              onSelected: (String where) {
+                print(where);
               },
-              icon: Icon(Icons.perm_identity_outlined)),
-        ],
-      ),
-
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Container(
-              color: Colors.blue[900],
-              width: double.infinity,
-              height: 80.0,
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(value: "sookmyung", child: Text("숙명여대")),
+                  PopupMenuItem(value: "ewha", child: Text("이화여대")),
+                ];
+              },
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  StepButton(
-                      selected: selectedStack ==0,
-                      step: 'Step1',
-                      onPressed: ()=>setState(() =>selectedStack =0),
-                      ),
-                  StepButton(
-                    selected: selectedStack ==1,
-                    step: 'Step2',
-                    onPressed: ()=>setState(() =>selectedStack =1),
-                  ),
-                  StepButton(
-                    selected: selectedStack ==2,
-                    step: 'Step3',
-                    onPressed: ()=>setState(() =>selectedStack =2),
-                  ),
-                ],
+                children: [Text("숙명여대"), Icon(Icons.arrow_drop_down)],
               ),
             ),
-            Form(
-                key: _fkey,
-                autovalidateMode: autovalidate
-                ? AutovalidateMode.onUserInteraction
-                    :AutovalidateMode.disabled,
-
-                child: Expanded(
-                  child: IndexedStack(
-                    index: selectedStack,
-                    children: <Widget>[
-                      Padding(padding: const EdgeInsets.symmetric
-                        (horizontal: 30.0),
-                        child: FirstStep(storenameController),
-                      ),
-                      Padding(padding: const EdgeInsets.symmetric
-                        (horizontal: 30.0),
-                        child: SecondStep(dateController,startTimeController, endTimeController ),
-                      ),
-                      Padding(padding: const EdgeInsets.symmetric
-                        (horizontal: 30.0),
-                        child: ThirdStep(submit: submit),
-                      ),
-
-                    ],
-            ),
-                ))
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyPage()),
+                  );
+                },
+                icon: Icon(Icons.perm_identity_outlined)),
           ],
+        ),
+
+        body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  color: Colors.blue[900],
+                  width: double.infinity,
+                  height: 80.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      StepButton(
+                        selected: selectedStack ==0,
+                        step: 'Step1',
+                        onPressed: ()=>setState(() =>selectedStack =0),
+                      ),
+                      StepButton(
+                        selected: selectedStack ==1,
+                        step: 'Step2',
+                        onPressed: ()=>setState(() =>selectedStack =1),
+                      ),
+                      StepButton(
+                        selected: selectedStack ==2,
+                        step: 'Step3',
+                        onPressed: ()=>setState(() =>selectedStack =2),
+                      ),
+                    ],
+                  ),
+                ),
+                Form(
+                    key: _fkey,
+                    autovalidateMode: autovalidate
+                        ? AutovalidateMode.onUserInteraction
+                        :AutovalidateMode.disabled,
+
+                    child: Expanded(
+                      child: IndexedStack(
+                        index: selectedStack,
+                        children: <Widget>[
+                          Padding(padding: const EdgeInsets.symmetric
+                            (horizontal: 30.0),
+                            child: FirstStep(storenameController),
+                          ),
+                          Padding(padding: const EdgeInsets.symmetric
+                            (horizontal: 30.0),
+                            child: SecondStep(dateController,startTimeController, endTimeController ),
+                          ),
+                          Padding(padding: const EdgeInsets.symmetric
+                            (horizontal: 30.0),
+                            child: ThirdStep(submit: submit),
+                          ),
+
+                        ],
+                      ),
+                    ))
+              ],
+            )
         )
-      )
     );
 
   }
@@ -232,6 +233,5 @@ class _TotalMakeMatchingState extends State<TotalMakeMatching> {
 
   }
 }
-
 
 

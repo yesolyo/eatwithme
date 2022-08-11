@@ -63,7 +63,7 @@ class _RecommendRegisterState extends State<RecommendRegister> {
         children: <Widget>[
           Padding(
               padding: EdgeInsets.all(14.0),
-              child: Text('1. $randomStore1 ,$randomNumber1',
+              child: Text('1. $randomStore1',
                   style: TextStyle(fontSize: 21)),
 
           ),

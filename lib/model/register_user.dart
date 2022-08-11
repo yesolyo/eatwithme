@@ -39,16 +39,15 @@ class Register {
         'user_id': user_id};
 
   static Register fromJson(Map<String, dynamic> json) => Register(
-      id: json['id'],
-      date: json['date'],
-      min: json['min'],
-      max: json['max'],
-      start: json['start'],
-      end: json['end'],
-      title: json['title'],
-      detail: json['detail'],
-      approve: json['approve'],
-      storeName: json['storeName'],
-      user_id: json['user_id'],);
+    id: json['id'],
+    date: json['date'],
+    min: json['min'],
+    max: json['max'],
+    start: json['start'],
+    end: json['end'],
+    title: json['title'],
+    detail: json['detail'],
+    approve: json['approve'],
+    storeName: json['storeName'],
+    user_id: json['user_id'],);
 }
-
