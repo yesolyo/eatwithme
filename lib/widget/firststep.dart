@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,17 @@ class _FirstStepState extends State<FirstStep> {
       autoCompleteData = jsonStringData;
     });
   }
-
+  
+  Future getApiTest () async {
+    final inputData = Provider.of<InputData>(context);
+    Uri uri = Uri.parse('http://10.0.2.2:5000/tospring');
+    var urlParam = uri.replace(queryParameters: {
+      "user_id": inputData.googleAccount!.email
+    }.map((key,value) => MapEntry(key, value.toString())),
+    );
+    var response = await http.post(urlParam);
+    print(response.body); //todo 'ok'
+  }
 
 
 
@@ -54,6 +64,7 @@ class _FirstStepState extends State<FirstStep> {
   void initState() {//set the initial value of text field
     super.initState();
     fetchAutoCompleteData();
+    getApiTest();
   }
 
   @override
