@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'googlelogin/login_page.dart';
 import 'model/input_data.dart';
 import 'pages/home_page.dart';
+import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 
 
 void main() async {
@@ -18,7 +19,6 @@ void main() async {
   await FlutterConfig.loadEnvVariables();
   runApp(MyApp());
 }
-
 class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }

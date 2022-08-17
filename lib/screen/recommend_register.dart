@@ -47,6 +47,8 @@ class _RecommendRegisterState extends State<RecommendRegister> {
     fetchAutoCompleteData();
   }
 
+
+
 //처음에는 사과가 선택되어 있도록 Apple로 초기화 -> groupValue에 들어갈 값!
   String radioButtonItem1 = '1';
   // Group Value for Radio Button.
