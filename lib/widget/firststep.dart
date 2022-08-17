@@ -11,11 +11,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:substring_highlight/substring_highlight.dart';
-import 'package:http/http.dart' as http;
-
 
 import '../model/input_data.dart';
-import '../model/timelistmodel.dart';
 
 
 
@@ -31,7 +28,7 @@ class FirstStep extends StatefulWidget {
 class _FirstStepState extends State<FirstStep> {
   late List<String> autoCompleteData;
   bool isLoading = false;
-  List _items = [];
+
   Future fetchAutoCompleteData() async {
     setState(() {
       isLoading = true;
@@ -49,15 +46,7 @@ class _FirstStepState extends State<FirstStep> {
       autoCompleteData = jsonStringData;
     });
   }
-  Future readJson() async {
-    final String stringData =
-    await rootBundle.loadString("lib/model/list_store.json");
 
-    final data = await jsonDecode(stringData);
-    setState(() {
-      _items = data["item"];
-    });
-  }
 
 
 
@@ -65,7 +54,6 @@ class _FirstStepState extends State<FirstStep> {
   void initState() {//set the initial value of text field
     super.initState();
     fetchAutoCompleteData();
-    readJson();
   }
 
   @override
@@ -151,106 +139,46 @@ class _FirstStepState extends State<FirstStep> {
             );
           },
         ),
-        ListView.builder(itemBuilder: (context,index){
-          return Card(
-              elevation: 10,
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-          Icon(Icons.article_outlined,
-          color: Colors.grey, size: 16),
-          Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Text("식당 추천 리스트"),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text(
+            '식당추천리스트',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          ]),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text(
+            '1순위: 피자보이시나 숙대입구점',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.normal),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-          Icon(Icons.article_outlined,
-          color: Colors.grey, size: 16),
-          Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Text(_items[index][0]),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text(
+            '2순위: 포36거리',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.normal),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          ]),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text(
+            '3순위: 라리에또 숙대점',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.normal),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-          Icon(Icons.article_outlined,
-          color: Colors.grey, size: 16),
-          Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Text(_items[index][1]),
-          ),
-          ]),
-          ),
-          Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-          Icon(Icons.article_outlined,
-          color: Colors.grey, size: 16),
-          Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Text(_items[index][2]),
-          ),
-          ]),
-          ),
-          Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-          Icon(Icons.article_outlined,
-          color: Colors.grey, size: 16),
-          Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Text(_items[index][3]),
-          ),
-          ]),
-          ),
-          Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-          Icon(Icons.article_outlined,
-          color: Colors.grey, size: 16),
-          Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Text(_items[index][4]),
-          ),
-          ]),
-          ),
-          ],
-          ),
-          ),
-          );
-
-        })
+        ),
       ],
     );
   }
