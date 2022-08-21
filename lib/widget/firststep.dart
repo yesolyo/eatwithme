@@ -11,6 +11,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:substring_highlight/substring_highlight.dart';
+import 'package:http/http.dart' as http;
 
 import '../model/input_data.dart';
 
@@ -28,6 +29,8 @@ class FirstStep extends StatefulWidget {
 class _FirstStepState extends State<FirstStep> {
   late List<String> autoCompleteData;
   bool isLoading = false;
+  bool newLoading = false;
+  late List<String> items;
 
   Future fetchAutoCompleteData() async {
     setState(() {
@@ -47,13 +50,34 @@ class _FirstStepState extends State<FirstStep> {
     });
   }
 
+  Future getApiTest () async {
+    setState(() {
+      newLoading = true;
+    });
+
+    final String stringData =
+    await rootBundle.loadString("lib/model/store_list.json");
+
+    final List<dynamic> itemJson = jsonDecode(stringData)['item'];
+
+    final List<String> item = itemJson.cast<String>();
+    setState(() {
+        newLoading = false;
+        print(item);
+        items = item;
+    });
+  }
+
 
 
 
   @override
   void initState() {//set the initial value of text field
+    items=['-','-','-','-','-'];
     super.initState();
     fetchAutoCompleteData();
+    getApiTest();
+
   }
 
   @override
@@ -141,8 +165,7 @@ class _FirstStepState extends State<FirstStep> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
-          child: Text(
-            '식당추천리스트',
+          child: Text('식당추천리스트',
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold),
             maxLines: 2,
@@ -152,7 +175,7 @@ class _FirstStepState extends State<FirstStep> {
         Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Text(
-            '1순위: 피자보이시나 숙대입구점',
+            '1순위:' + items[0],
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.normal),
             maxLines: 2,
@@ -162,7 +185,7 @@ class _FirstStepState extends State<FirstStep> {
         Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Text(
-            '2순위: 포36거리',
+            '2순위:' + items[1],
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.normal),
             maxLines: 2,
@@ -172,14 +195,14 @@ class _FirstStepState extends State<FirstStep> {
         Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Text(
-            '3순위: 라리에또 숙대점',
+            '3순위:' + items[2],
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.normal),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),
-      ],
+    ]
     );
   }
 }
