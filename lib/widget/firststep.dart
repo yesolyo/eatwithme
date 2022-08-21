@@ -54,11 +54,20 @@ class _FirstStepState extends State<FirstStep> {
     setState(() {
       newLoading = true;
     });
+    final inputData = Provider.of<InputData>(context, listen: false,);
+    var url = "http://10.0.2.2:5000/tospring";
+    Map data = {"user_id": inputData.googleAccount!.email};
 
-    final String stringData =
-    await rootBundle.loadString("lib/model/store_list.json");
+    var body = json.encode(data);
 
-    final List<dynamic> itemJson = jsonDecode(stringData)['item'];
+    final response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: body);
+
+    print(response.body);
+    String responseBody = response.body;
+
+    final List<dynamic> itemJson = jsonDecode(responseBody)['item'];
 
     final List<String> item = itemJson.cast<String>();
     setState(() {
