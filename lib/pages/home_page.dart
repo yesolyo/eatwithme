@@ -1,10 +1,10 @@
 
-import 'package:firebase_graduation_project/screen/mypage.dart';
+import 'package:firebase_graduation_project/screen/mypage_screen.dart';
 import 'package:flutter/material.dart';
-import '../screen/time_listview.dart';
+import '../screen/total_list_screen.dart';
 import '../screen/total_make_matching.dart';
 import '../widget/googlemap_page.dart';
-import '../screen/home_screen.dart';
+import '../screen/googlemap_screen.dart';
 
 import '../widget/bottom_home.dart';
 

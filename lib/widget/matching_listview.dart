@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_graduation_project/screen/recommend_register.dart';
+import 'package:firebase_graduation_project/screen/rec_register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';

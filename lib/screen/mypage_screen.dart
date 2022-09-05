@@ -1,4 +1,4 @@
-import 'package:firebase_graduation_project/screen/recommend_register.dart';
+import 'package:firebase_graduation_project/screen/rec_register_screen.dart';
 import 'package:firebase_graduation_project/widget/register_listview.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class _MyPageState extends State<MyPage> {
         children: [
           Text("매칭 등록", textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold,
             fontSize: 20,color: Colors.black45)),
-          Expanded(child: ApplicationListview()),
+          Expanded(child: RegisterListview()),
           Text("매칭 신청",textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.bold,
             fontSize: 20,color: Colors.black45)),
           Expanded(child: MatchingListview()),

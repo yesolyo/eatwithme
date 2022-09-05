@@ -7,7 +7,7 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'googlelogin/login_page.dart';
+import 'pages/login_page.dart';
 import 'model/input_data.dart';
 import 'pages/home_page.dart';
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';

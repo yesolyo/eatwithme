@@ -7,7 +7,6 @@ class Register {
   final String end;
   final String title;
   final String detail;
-  final int approve;
   final String storeName;
   final String user_id;
 
@@ -20,7 +19,6 @@ class Register {
     required this.end,
     required this.title,
     required this.detail,
-    required this.approve,
     required this.storeName,
     required this.user_id,});
 
@@ -34,7 +32,6 @@ class Register {
         'end': end,
         'title': title,
         'detail': detail,
-        'approve': approve,
         'storeName': storeName,
         'user_id': user_id};
 
@@ -47,7 +44,6 @@ class Register {
     end: json['end'],
     title: json['title'],
     detail: json['detail'],
-    approve: json['approve'],
     storeName: json['storeName'],
     user_id: json['user_id'],);
 }

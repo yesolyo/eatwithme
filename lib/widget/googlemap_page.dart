@@ -9,19 +9,19 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../model/input_data.dart';
 import '../screen/find_listview.dart';
 
-class TestGoogleMap extends StatefulWidget {
-  const TestGoogleMap({Key? key}) : super(key: key);
+class GoogleMapWidget extends StatefulWidget {
+  const GoogleMapWidget({Key? key}) : super(key: key);
 
   @override
-  State<TestGoogleMap> createState() => _TestGoogleMapState();
+  State<GoogleMapWidget> createState() => _GoogleMapWidgetState();
 }
 
-class _TestGoogleMapState extends State<TestGoogleMap> {
+class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   Future? _future;
 
   Future<String> loadString() async =>
-      await rootBundle.loadString('lib/model/market_list_data.json');
+      await rootBundle.loadString('lib/json/store_list_data.json');
   List<Marker> allMarkers = [];
   Completer<GoogleMapController> _controller = Completer();
 

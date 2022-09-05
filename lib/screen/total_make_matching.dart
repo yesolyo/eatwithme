@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:firebase_graduation_project/screen/mypage.dart';
+import 'package:firebase_graduation_project/screen/mypage_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -102,7 +102,6 @@ class _TotalMakeMatchingState extends State<TotalMakeMatching> {
     }
 
     final register = Register(
-      approve: 0,
       date: inputData.promise_date,
       detail:inputData.detail,
       end:inputData.endtime,

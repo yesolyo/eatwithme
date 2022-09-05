@@ -1,5 +1,5 @@
 
-import 'package:firebase_graduation_project/screen/mypage.dart';
+import 'package:firebase_graduation_project/screen/mypage_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/googlemap_page.dart';
@@ -51,7 +51,7 @@ class Homescreen extends StatelessWidget {
               icon: Icon(Icons.perm_identity_outlined)),
         ],
       ),
-      body: TestGoogleMap(),
+      body: GoogleMapWidget(),
     );
   }
 }

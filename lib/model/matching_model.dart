@@ -5,7 +5,6 @@ class Matching {
   final String end;
   final String title;
   final String detail;
-  final int approve;
   final int max;
   final String storeName;
   final String register_id;
@@ -18,7 +17,6 @@ class Matching {
     required this.end,
     required this.title,
     required this.detail,
-    required this.approve,
     required this.max,
     required this.storeName,
     required this.register_id,
@@ -33,7 +31,6 @@ class Matching {
         'end': end,
         'title': title,
         'detail': detail,
-        'approve': approve,
         'max': max,
         'storeName': storeName,
         'register_id': register_id,
@@ -46,7 +43,6 @@ class Matching {
     end: json['end'],
     title: json['title'],
     detail: json['detail'],
-    approve: json['approve'],
       max: json['max'],
     storeName: json['storeName'],
     register_id: json['register_id'],

@@ -1,23 +1,23 @@
-
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_graduation_project/screen/recommend_register.dart';
+import 'package:firebase_graduation_project/screen/rec_register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../model/input_data.dart';
 import '../model/register_user.dart';
 
 
-class ApplicationListview extends StatefulWidget {
-  const ApplicationListview({Key? key}) : super(key: key);
+class RegisterListview extends StatefulWidget {
+  const RegisterListview({Key? key}) : super(key: key);
 
   @override
-  State<ApplicationListview> createState() => _ApplicationListviewState();
+  State<RegisterListview> createState() => _RegisterListviewState();
 }
 
-class _ApplicationListviewState extends State<ApplicationListview> {
+class _RegisterListviewState extends State<RegisterListview> {
 
 
 
@@ -199,43 +199,73 @@ class _ApplicationListviewState extends State<ApplicationListview> {
                                     .white, // Text Color (Foreground color)
                               ),
                               onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible:
-                                  false, // 다이얼로그 이외의 바탕 눌러도 안꺼지도록 설정
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text('확인창'),
-                                      content: SingleChildScrollView(
-                                        child: ListBody(
-                                          //List Body를 기준으로 Text 설정
-                                          children: <Widget>[
-                                            Text('취소하시겠습니까?'),
-                                          ],
+                                if (register.min ==1) {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible:
+                                    false, // 다이얼로그 이외의 바탕 눌러도 안꺼지도록 설정
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('확인창'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            //List Body를 기준으로 Text 설정
+                                            children: <Widget>[
+                                              Text('취소하시겠습니까?'),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          child: Text('확인'),
-                                          onPressed: () {
-                                            final docuser=FirebaseFirestore.instance
-                                            .collection('register')
-                                            .doc(register.id);
+                                        actions: [
+                                          TextButton(
+                                            child: Text('확인'),
+                                            onPressed: () {
+                                              final docuser = FirebaseFirestore
+                                                  .instance
+                                                  .collection('register')
+                                                  .doc(register.id);
 
-                                            docuser.delete();
-                                            Navigator.of(context).pop();
-                                          },
+                                              docuser.delete();
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: Text('취소'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }else{
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible:
+                                    false, // 다이얼로그 이외의 바탕 눌러도 안꺼지도록 설정
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('확인창'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            //List Body를 기준으로 Text 설정
+                                            children: <Widget>[
+                                              Text('신청자가 있어서 취소할 수 없습니다'),
+                                            ],
+                                          ),
                                         ),
-                                        TextButton(
-                                          child: Text('취소'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                        actions: [
+                                          TextButton(
+                                            child: Text('확인'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
                               },
                               child: Text("취소")),
 

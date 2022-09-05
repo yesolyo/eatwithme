@@ -3,11 +3,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_graduation_project/model/matching_model.dart';
-import 'package:firebase_graduation_project/widget/matching_listview.dart';
-import 'package:firebase_graduation_project/screen/mypage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 import '../model/input_data.dart';
 import '../model/register_user.dart';
@@ -229,7 +226,6 @@ class _FindListViewState extends State<FindListView> {
                                                   InputData>(context,
                                                 listen: false,);
                                               final matching = Matching(
-                                                approve: 0,
                                                 max: register.max,
                                                 date: register.date,
                                                 detail: register.detail,

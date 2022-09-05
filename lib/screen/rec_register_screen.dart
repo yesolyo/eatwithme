@@ -31,7 +31,7 @@ class _RecommendRegisterState extends State<RecommendRegister> {
       isLoading = true;
     });
     final String stringData =
-    await rootBundle.loadString("lib/model/store_id_name.json");
+    await rootBundle.loadString("lib/json/store_id_name.json");
     final List<dynamic> json = jsonDecode(stringData);
     final List<String> jsonStringData = json.cast<String>();
 
