@@ -1,16 +1,6 @@
-# firebase_graduation_project
+# EatWithME
 
-A new Flutter project.
+# 시연영상
+<img src="https://user-images.githubusercontent.com/104904719/193561263-fe0da69d-5ce2-4629-bb00-fc0a3d07e4bf.gif">
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
