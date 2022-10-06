@@ -38,7 +38,7 @@ class _FirstStepState extends State<FirstStep> {
     });
 
     final String stringData =
-    await rootBundle.loadString("lib/model/data.json");
+    await rootBundle.loadString("lib/json/store_id_name.json");
 
     final List<dynamic> json = jsonDecode(stringData);
 
@@ -49,8 +49,9 @@ class _FirstStepState extends State<FirstStep> {
       autoCompleteData = jsonStringData;
     });
   }
+  //추천시스템 연결 부분
 
-  Future getApiTest () async {
+  /*Future getApiTest () async {
     setState(() {
       newLoading = true;
     });
@@ -71,21 +72,21 @@ class _FirstStepState extends State<FirstStep> {
 
     final List<String> item = itemJson.cast<String>();
     setState(() {
-      newLoading = false;
-      print(item);
-      items = item;
+        newLoading = false;
+        print(item);
+        items = item;
     });
-  }
+  }*/
 
 
 
 
   @override
-  void initState() {//set the initial value of text field
+  void initState() {
     items=['-','-','-','-','-'];
     super.initState();
     fetchAutoCompleteData();
-    getApiTest();
+    //getApiTest();
 
   }
 
@@ -172,45 +173,46 @@ class _FirstStepState extends State<FirstStep> {
               );
             },
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Text('식당추천리스트',
-              style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+          // 추천시스템 보여주는 부분
+          /*Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text('식당추천리스트',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Text(
-              '1순위:' + items[0],
-              style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.normal),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text(
+            '1순위:' + items[0],
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.normal),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Text(
-              '2순위:' + items[1],
-              style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.normal),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text(
+            '2순위:' + items[1],
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.normal),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Text(
-              '3순위:' + items[2],
-              style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.normal),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Text(
+            '3순위:' + items[2],
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.normal),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
+        ),*/
         ]
     );
   }
